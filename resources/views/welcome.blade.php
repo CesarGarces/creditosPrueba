@@ -83,11 +83,11 @@
                 </div>
             <form method="POST" action="{{ url('creditos') }}">        
                 <div>
-                <input class="form-control" type="text" name="Documento" placeholder="Documento">
+                    <input class="form-control" type="text" name="Documento" placeholder="Documento">
                 </div>
-                    <div>
+                <div>
                     <button class="btn btn-info" type="submit">Enviar</button>
-                    </div>
+                </div>
                     {{ csrf_field() }}
             </form>
                 

@@ -89,7 +89,6 @@
                                 <p class="card-text">Fecha ultimo abono: {{ $clientes[0]->fecha_abono }}</p>
                             </div>
                     </td>
-
                     
                 </tr>
                 <tr>
@@ -105,16 +104,7 @@
 
             </table>
                         
-                            
-                        
-                              
-                      
-
-
         </div>
-          
-
-    
-               
+                      
 </body>
 </html>

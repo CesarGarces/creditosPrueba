@@ -83,11 +83,11 @@
                 </div>
             <form method="POST" action="{{url('valor', ['documento' => $clientes[0]->documento])}}">        
                 <div>
-                <input class="form-control" type="text" name="valAbono" placeholder="100000">
+                    <input class="form-control" type="text" name="valAbono" placeholder="100000">
                 </div>
-                    <div>
+                <div>
                     <button class="btn btn-info" type="submit">Enviar</button>
-                    </div>
+                </div>
                     {{ csrf_field() }}
             </form>
                 
