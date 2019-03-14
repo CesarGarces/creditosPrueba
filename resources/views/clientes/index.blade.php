@@ -25,79 +25,83 @@
                 <p class="lead">Teléfono: {{ $clientes[0]->telefono }}</p>
                 <p class="lead">Direccíon: {{ $clientes[0]->direccion }}</p>
                 <p class="lead">Estos son los movimientos de su cuenta.</p>
+                <span>Valor del credito: ${{ number_format($clientes[0]->valor_credito, 2) }}<span>
+                <span>Fecha desembolso: {{ $clientes[0]->fecha_desembolso }}</span>
                 <a class="btn btn-primary" href="{{url('abonos', ['documento' => $clientes[0]->documento])}}">Abonar</a>
             </div>
 
             
             <table align="center" style="width: 100%;">
-                <tr>
-                    <td align="center">
-                            <div class="card" style="background-color: cyan;width: 18rem;">
-                                <div class="card-body">
-                                <h5 class="card-title">valor del credito</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">${{ number_format($clientes[0]->valor_credito, 2) }}</h6>
-                                <p class="card-text">Fecha desembolso: {{ $clientes[0]->fecha_desembolso }}</p>
-                            </div>
+                <thead>
+                    <td align="center" style="color: white;background-color: #05a3a5;">
+                    FECHA MOVIMIENTO
                     </td>
+                    <td align="center" style="color: white;background-color: #05a3a5;">
+                    VALOR DEL ABONO 
+                    </td>
+                    <td align="center" style="color: white;background-color: #05a3a5;">
+                    CAPITAL
+                    </td>
+                    <td align="center" style="color: white;background-color: #05a3a5;">
+                    INTERESES
+                    </td>
+                    <td align="center" style="color: white;background-color: #05a3a5;">
+                    SALDO
+                    </td>
+                </thead>
+                @php 
+                 $totalInteres = 0; 
+                @endphp
+                @foreach ($abonos as $abono)
+                <tbody>
+                    <td align="center" style="background-color: aqua;">{{ $abono->fecha_abono }}</td>
+                    <td align="right" style="background-color: aqua;"">${{ number_format($abono->valor_abono, 2 ) }}</td>
+                    <td align="right" style="background-color: aqua;"">${{ number_format($abono->abono_capital, 2 ) }}</td>
+                    <td align="right" style="background-color: aqua;"">${{ number_format($abono->intereses, 2 ) }}</td>
+                    <td align="right" style="background-color: aqua;"">${{ number_format($abono->saldo, 2 ) }}</td>
+                </tbody>
+                @php
+                $totalInteres += $abono->intereses;
+                @endphp
+                @endforeach
                 
-                    <td align="center">
-                            <div class="card" style="background-color: cyan;width: 18rem;">
-                                <div class="card-body">
-                                <h5 class="card-title">Valor Intereses</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">${{ number_format($clientes[0]->intereses, 2 ) }}</h6>
-                                
-                            </div>
-                    </td>
-
-                    <td align="center">
-                            <div class="card" style="background-color: cyan;width: 18rem;">
-                                <div class="card-body">
-                                <h5 class="card-title">FECHA CREDITO</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">{{ $clientes[0]->fecha_desembolso }}</h6>
-                               
-                            </div>
-                    </td>
-
-                    
-                </tr>
+                
+                
 
                 <table align="center" style="width: 100%;">
                 <tr>
                     <td align="center">
-                            <div class="card" style="background-color: cyan;width: 18rem;">
+                            <div class="card" style="background-color: #00ffdc33;width: 18rem;">
                                 <div class="card-body">
                                 <h5 class="card-title">Saldo Actual</h5>
                                 <h6 class="card-subtitle mb-2 text-muted">${{ number_format($clientes[0]->saldo, 2) }}</h6>
-                                <p class="card-text">Fecha desembolso: {{ $clientes[0]->fecha_desembolso }}</p>
+                                <p class="card-text"></p>
                             </div>
                     </td>
                 
                     <td align="center">
-                            <div class="card" style="background-color: cyan;width: 18rem;">
+                            <div class="card" style="background-color: #00ffdc33;width: 18rem;">
                                 <div class="card-body">
-                                <h5 class="card-title">Total Abonado a Capital</h5>
-                                ${{ number_format($clientes[0]->valor_abono, 2) }}
-                                <p class="card-text">Fecha abono: {{ $clientes[0]->fecha_abono }}</p>
+                                <h5 class="card-title">Valor Total Abonos</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">${{ number_format($clientes[0]->totalabonado, 2) }}</h6>
                             </div>
                     </td>
 
                     <td align="center">
-                            <div class="card" style="background-color: cyan;width: 18rem;">
+                            <div class="card" style="background-color: #00ffdc33;width: 18rem;">
                                 <div class="card-body">
                                 <h5 class="card-title">Total Intereses Recaudados</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">${{ number_format($clientes[0]->totalabonado, 2) }}</h6>
-                                <p class="card-text">Fecha ultimo abono: {{ $clientes[0]->fecha_abono }}</p>
+                                <h6 class="card-subtitle mb-2 text-muted">${{ number_format($totalInteres, 2) }}</h6>                              
                             </div>
                     </td>
                     
                 </tr>
                 <tr>
-                <td align="center">
-                            <div class="card" style="background-color: cyan;width: 18rem;">
-                                <div class="card-body">
+                <td colspan="3" align="right">
+                            <div class="card" style="background-color: #dbe8f3;">
+                                <div class="card-body" >
                                 <h5 class="card-title">Valor Total Abonos</h5>
                                 <h6 class="card-subtitle mb-2 text-muted">${{ number_format($clientes[0]->totalabonado, 2) }}</h6>
-                                <p class="card-text">Fecha ultimo abono: {{ $clientes[0]->fecha_abono }}</p>
                             </div>
                     </td>
                 </tr>
