@@ -55,10 +55,10 @@
                 @foreach ($abonos as $abono)
                 <tbody>
                     <td align="center" style="background-color: aqua;">{{ $abono->fecha_abono }}</td>
-                    <td align="right" style="background-color: aqua;"">${{ number_format($abono->valor_abono, 2 ) }}</td>
-                    <td align="right" style="background-color: aqua;"">${{ number_format($abono->abono_capital, 2 ) }}</td>
-                    <td align="right" style="background-color: aqua;"">${{ number_format($abono->intereses, 2 ) }}</td>
-                    <td align="right" style="background-color: aqua;"">${{ number_format($abono->saldo, 2 ) }}</td>
+                    <td align="right" style="background-color: aqua;">${{ number_format($abono->valor_abono, 2 ) }}</td>
+                    <td align="right" style="background-color: aqua;">${{ number_format($abono->abono_capital, 2 ) }}</td>
+                    <td align="right" style="background-color: aqua;">${{ number_format($abono->intereses, 2 ) }}</td>
+                    <td align="right" style="background-color: aqua;">${{ number_format($abono->saldo, 2 ) }}</td>
                 </tbody>
                 @php
                 $totalInteres += $abono->intereses;
@@ -74,7 +74,7 @@
                             <div class="card" style="background-color: #00ffdc33;width: 18rem;">
                                 <div class="card-body">
                                 <h5 class="card-title">Saldo Actual</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">${{ number_format($clientes[0]->saldo, 2) }}</h6>
+                                <h6 class="card-subtitle mb-2 text-muted">${{ number_format($abonos[0]->saldo, 2) }}</h6>
                                 <p class="card-text"></p>
                             </div>
                     </td>

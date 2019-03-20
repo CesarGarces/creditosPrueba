@@ -11,8 +11,10 @@ class CrediController extends Controller
 
     public function show(){
         $clientes = DB::select("SELECT  SUM(valor_abono) as totalabonado,  documento, nombre, direccion, telefono, valor_credito, fecha_desembolso, valor_abono, abono_capital, fecha_abono, fecha_desembolso, saldo, intereses FROM clientes INNER JOIN creditos on clientes.documento = creditos.clientes_documento INNER JOIN abonos on abonos.creditos_id_credito = creditos.id_credito WHERE clientes.documento = '".$_POST['Documento']."' order by abonos.fecha_abono asc LIMIT 1" );
-        $abonos = DB::select("SELECT   valor_credito, fecha_desembolso, valor_abono, abono_capital, fecha_abono, fecha_desembolso, saldo, intereses FROM clientes INNER JOIN creditos on clientes.documento = creditos.clientes_documento INNER JOIN abonos on abonos.creditos_id_credito = creditos.id_credito WHERE clientes.documento = '".$_POST['Documento']."' order by abonos.fecha_abono  asc " );
+        $abonos = DB::select("SELECT valor_credito, fecha_desembolso, valor_abono, abono_capital, fecha_abono, fecha_desembolso, saldo, intereses FROM clientes INNER JOIN creditos on clientes.documento = creditos.clientes_documento INNER JOIN abonos on abonos.creditos_id_credito = creditos.id_credito WHERE clientes.documento = '".$_POST['Documento']."' order by abonos.saldo  asc " );
+        
         $intereses = DB::select("SELECT  SUM(intereses) as totalintereses FROM clientes INNER JOIN creditos on clientes.documento = creditos.clientes_documento INNER JOIN abonos on abonos.creditos_id_credito = creditos.id_credito WHERE clientes.documento = '".$_POST['Documento']."' order by abonos.id_abono asc LIMIT 1" );
+        //$saldo = DB::select("SELECT saldo from abonos inner join creditos on abonos.creditos_id_credito = creditos.id_credito inner join clientes on creditos.clientes_documento = clientes.documento where clientes.documento = '".$_POST['Documento']."' order by abonos.fecha_abono desc limit 1");
         return view('clientes.index', ['clientes' => $clientes], ['abonos' => $abonos], ['intereses' => $intereses]);  
     }
 
